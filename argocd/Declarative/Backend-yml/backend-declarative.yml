@@ -4,7 +4,8 @@ metadata:
   name: chat-app-backend                            # Name of this ArgoCD application
   namespace: argocd                # Must be created in the 'argocd' namespace
 spec:
-  project: backend-team                # ArgoCD Project (logical grouping of apps)
+ # project: backend-team                # ArgoCD Project (logical grouping of apps)
+  project: default                # ArgoCD Project (logical grouping of apps)
   source:
     repoURL:  https://github.com/abhishekkargeti1/ChatApplication-Backend.git # Git repo containing manifests
     targetRevision: main           # Git branch or tag (e.g., main, dev, release-1.0)
