@@ -11,7 +11,7 @@ spec:
     path: k8s/   # Path inside repo where manifests live
   destination:
     server: https://172.31.19.108:33893   # Target cluster API Private ip
-    namespace: frontend             # Namespace in which to deploy the app
+    namespace: chat-app            # Namespace in which to deploy the app
   syncPolicy:                      # Defines how ArgoCD syncs the app
     automated:                     # Enable auto-sync
       prune: true                  # Delete resources removed from Git

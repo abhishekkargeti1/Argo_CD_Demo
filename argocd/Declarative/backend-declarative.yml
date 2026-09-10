@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1   # API group for ArgoCD resources
 kind: Application                  # Resource type is "Application"
 metadata:
-  name: chat-app-deployment                            # Name of this ArgoCD application
+  name: chat-app-backend                            # Name of this ArgoCD application
   namespace: argocd                # Must be created in the 'argocd' namespace
 spec:
   project: backend-team                # ArgoCD Project (logical grouping of apps)
@@ -11,7 +11,7 @@ spec:
     path: k8s/   # Path inside repo where manifests live
   destination:
     server: https://172.31.19.108:33893   # Target cluster API Private ip
-    namespace: backend             # Namespace in which to deploy the app
+    namespace: chat-app            # Namespace in which to deploy the app
   syncPolicy:                      # Defines how ArgoCD syncs the app
     automated:                     # Enable auto-sync
       prune: true                  # Delete resources removed from Git
