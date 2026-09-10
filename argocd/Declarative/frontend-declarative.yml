@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1   # API group for ArgoCD resources
 kind: Application                  # Resource type is "Application"
 metadata:
-  name: Chat-app-frontend                            # Name of this ArgoCD application
+  name: chatapp-frontend-server                            # Name of this ArgoCD application
   namespace: argocd                # Must be created in the 'argocd' namespace
 spec:
   project: frontend-team                # ArgoCD Project (logical grouping of apps)
