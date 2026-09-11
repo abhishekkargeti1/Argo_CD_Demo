@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: auth-server-app
-          image: abhishekkargeti/authserviceimages
+          image: abhishekkargeti/authserviceimages:v1.0.0
           ports:
             - containerPort: 8087
           env:
