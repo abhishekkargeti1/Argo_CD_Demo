@@ -13,5 +13,5 @@ resources:
   - persistentVolume.yml
 images:
   - name: abhishekkargeti/authserviceimages
-    newTag: v2.0.0
+    newTag: v3.0.0
 
