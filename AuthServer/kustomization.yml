@@ -15,3 +15,10 @@ images:
 <<<<<<< HEAD
  - name: abhishekkargeti/authserviceimages
    newTag: v1.0.3
+=======
+  - name: abhishekkargetti/authserviceimages
+    newName: abhishekkargetti/authserviceimages
+    newTag: v1.0.0
+  - name: abhishekkargeti/authserviceimages
+    newTag: v1.0.3
+>>>>>>> ea667c0e32559683b19c259c79a7112160572724
