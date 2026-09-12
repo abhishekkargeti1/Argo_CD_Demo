@@ -15,3 +15,5 @@ images:
   - name: abhishekkargetti/authserviceimages
     newName: abhishekkargetti/authserviceimages
     newTag: v1.0.0
+  - name: abhishekkargeti/authserviceimages
+    newTag: v1.0.2
