@@ -12,5 +12,6 @@ resources:
   - namespace.yml
   - persistentVolume.yml
 images:
+<<<<<<< HEAD
  - name: abhishekkargeti/authserviceimages
    newTag: v1.0.3
