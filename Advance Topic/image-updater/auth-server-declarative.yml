@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1 # Specifies the API version for the ArgoCD Application CRD
+kind: Application               # Declares this resource as an ArgoCD Application
+metadata:
+  name: auth-server-app                # Name of the ArgoCD Application
+  namespace: argocd             # Namespace where the Application resource will be created
+  annotations:
+    # 1. Alias & Registry mapping
+    argocd-image-updater.argoproj.io/image-list: auth-server-image=abhishekkargeti/authserviceimages
+
+    # 2. Update strategy & Version constraint
+    argocd-image-updater.argoproj.io/auth-server-image.update-strategy: semver
+    #argocd-image-updater.argoproj.io/auth-server-image.allow-tags: regexp:^v?[0-9]+\.[0-9]+\.[0-9]+$
+
+    # 3. Git write-back configuration
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/argocd-image-updater-git-creds
+
+    # 4. Force update check even if deployment status isn't reported as active
+   # argocd-image-updater.argoproj.io/force-update: "true"
+
+spec:
+  project: default              # Associates this Application with the 'default' ArgoCD project
+  source:
+    repoURL: https://github.com/abhishekkargeti1/Argo_CD_Demo.git # Git repository containing the app manifests
+    targetRevision: main        # Branch or tag to track in the repository
+    path: AuthServer
+    kustomize: {}    # Path within the repo where the manifests(kustomization) are located
+  destination:
+    server: https://172.31.19.108:33893 # Kubernetes API server address (in-cluster)
+    namespace: default           # Namespace in the cluster where app resources will be deployed
+  syncPolicy:
+    automated:                  # Enables automated sync for the application
+      prune: true               # Automatically deletes resources that are no longer defined in Git
+      selfHeal: true 
+    syncOptions:
+      - CreateNamespace=true

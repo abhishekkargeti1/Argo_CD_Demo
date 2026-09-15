@@ -1,0 +1,24 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+
+metadata:
+  name: auth-server-image-updater
+  namespace: argocd
+
+spec:
+  applicationRefs:
+    - namePattern: "auth-server-app"
+
+      images:
+        - alias: auth-server-image
+          imageName: abhishekkargeti/authserviceimages:>=1.0.0
+
+          commonUpdateSettings:
+            updateStrategy: semver
+
+  writeBackConfig:
+    method: git:secret:argocd-image-updater-git-creds
+
+    gitConfig:
+      branch: main
+      writeBackTarget: kustomization

@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1   # API group for ArgoCD resources
+kind: Application                  # Resource type is "Application"
+metadata:
+  name: chatapp-frontend-server                            # Name of this ArgoCD application
+  namespace: argocd                # Must be created in the 'argocd' namespace
+  annotations:
+    # The email notifier must be configured in argocd-notifications-cm.yaml, The `.email` is the name of the notifier, i.e, `service.email` in the argocd-notifications-cm.yaml.
+    # Subscribe to notifications when the app health is degraded.
+    notifications.argoproj.io/subscribe.on-health-degraded.email: "abhishek.kargeti@gmail.com"  # you can add multiple email ids separated by comma like "<receiver@example.com>, <receiver2@example.com>"
+    # Subscribe to notifications when the app is successfully deployed.
+    notifications.argoproj.io/subscribe.on-deployed.email: "abhishek.kargeti@gmail.com"
+spec:
+  # project: frontend-team                # ArgoCD Project (logical grouping of apps)
+  project: default
+  source:
+    repoURL: https://github.com/abhishekkargeti1/ChatApplication-FrontEnd.git  # Git repo containing manifests
+    targetRevision: main           # Git branch or tag (e.g., main, dev, release-1.0)
+    path: k8s/   # Path inside repo where manifests live
+  destination:
+    server: https://172.31.19.108:33893   # Target cluster API Private ip
+    namespace: chat-app            # Namespace in which to deploy the app
+  syncPolicy:                      # Defines how ArgoCD syncs the app
+    automated:                     # Enable auto-sync
+      prune: true                  # Delete resources removed from Git
+      selfHeal: true               # Fix drift if resources are changed manually
+    syncOptions:
+      - CreateNamespace=true       # Create namespace if not present
+
